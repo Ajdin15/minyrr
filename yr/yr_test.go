@@ -2,6 +2,7 @@ package yr
 
 import (
 	"testing"
+      "github.com/Ajdin15/funtemps/conv"
 )
 
 func TestCelsiusToFarhenheitString(t *testing.T) {
