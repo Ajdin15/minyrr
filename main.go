@@ -1,32 +1,31 @@
 package main
 	
 
-	import (
-		"bufio"
-		"fmt"
-		"io"
-		"log"
-		"os"
-		"strconv"
-		"strings"
-	       "github.com/Ajdin15/funtemps/conv"
-	)
+import (
+	"bufio"
+	"fmt"
+	"io"
+	"log"
+	"os"
+	"strconv"
+	"strings"
+      "github.com/Ajdin15/funtemps/conv"
+)
+	
+func convert() {
 	
 
-	func convert() {
+	fmt.Println("converting all measurment..")
+	var buffer []byte
+	var linebuf []byte // nil
+	buffer = make([]byte, 1)
+	bytesCount := 0
+	lineCount := 0
 	
 
-		fmt.Println("converting all measurment..")
-		var buffer []byte
-		var linebuf []byte // nil
-		buffer = make([]byte, 1)
-		bytesCount := 0
-		lineCount := 0
-	
-
-		src, err := os.Open("kjevik-temp-celsius-20220318-20230318.csv")
-		if err != nil {
-			log.Fatal(err)
+	src, err := os.Open("kjevik-temp-celsius-20220318-20230318.csv")
+	if err != nil {
+	        log.Fatal(err)
 		}
 		defer src.Close()
 	
@@ -125,20 +124,20 @@ package main
 	}
 	
 
-	func average(unit string) {
-		fmt.Println("kalkulere gjennomsnitt temperaturen...")
-		var buffer []byte
-		var linebuf []byte
-		buffer = make([]byte, 1)
-		bytesCount := 0
-		lineCount := 0
+func average(unit string) {
+     fmt.Println("kalkulere gjennomsnitt temperaturen...")
+	var buffer []byte
+	var linebuf []byte
+	buffer = make([]byte, 1)
+	bytesCount := 0
+	lineCount := 0
 	
 
-		var sum float64 = 0
-		var n float64 = 0
+	var sum float64 = 0
+	var n float64 = 0
 	
 
-		src, err := os.Open("kjevik-temp-celsius-20220318-20230318.csv")
+	src, err := os.Open("kjevik-temp-celsius-20220318-20230318.csv")
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -196,22 +195,21 @@ package main
 	}
 	
 
-	func main() {
-	
-
-		scanner := bufio.NewScanner(os.Stdin)
-		fmt.Println("to start the program, type: minyr")
-		scanner.Scan()
-		input := scanner.Text()
-		if input == "minyr" {
+func main() {
+	 
+scanner := bufio.NewScanner(os.Stdin)
+fmt.Println("to start the program, type: minyr")
+scanner.Scan()
+input := scanner.Text()
+	if input == "minyr" {
 			for {
-				fmt.Println("velg et alternativ: q or exit, convert, average")
+				fmt.Println("velg et alternativ: exit, convert, average")
 				scanner.Scan()
 				input := scanner.Text()
 	
 
-				if input == "q" || input == "exit" {
-					fmt.Println("Hade! Håper vi aldri ses igjen :)")
+				 if input == "q" ||input == "exit" {
+					fmt.Println("du har forlat minyr")
 					os.Exit(0)
 				} else if input == "convert" {
 					if _, err := os.Stat("kjevik-temp-fahr-20220318-20230318.csv"); err == nil {
@@ -237,16 +235,16 @@ package main
 						average("c")
 					}
 				} else {
-					fmt.Println("Please choose a valid option; q/exit, convert, average")
+					fmt.Println("Please choose a valid option; exit, convert, average")
 					continue
-				}
+		}
 	
 
-			}
+}
 	
 
 		}
 	
 
-	}
+}
 
