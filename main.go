@@ -206,9 +206,9 @@ input := scanner.Text()
 				fmt.Println("velg et alternativ: exit, convert, average")
 				scanner.Scan()
 				input := scanner.Text()
-	
 
-				 if input == "q" ||input == "exit" {
+
+				 if input == "exit" {
 					fmt.Println("du har forlat minyr")
 					os.Exit(0)
 				} else if input == "convert" {
@@ -243,8 +243,8 @@ input := scanner.Text()
 }
 	
 
-		}
-	
+		
+    }	
 
 }
 
