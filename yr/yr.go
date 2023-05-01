@@ -31,15 +31,15 @@ func CelsiusToFahrenheitLine(line string) (string, error) {
 	elementsInLine := strings.Split(line, ";")
 	var err error
 	if len(elementsInLine) == 4 {
-		elementsInLine[3], err = CelsiusToFarhrenheitString(elementsInLine[3])
-			if err != nil {
-				return "", err
+	elementsInLine[3], err = CelsiusToFarhrenheitString(elementsInLine[3])
+	if err != nil {
+	return "", err
 			}
-		} else {
-			return "", errors.New("linje har ikke forventet format")
-		}
-		return strings.Join(elementsInLine, ";"), nil
+	} else {
+	return "", errors.New("linje har ikke forventet format")
 	}
+	return strings.Join(elementsInLine, ";"), nil
+}
 	
 
 func AverageCelsius(unit string) (string, error) {
@@ -57,57 +57,57 @@ func AverageCelsius(unit string) (string, error) {
 
 	src, err := os.Open("../kjevik-temp-celsius-20220318-20230318.csv")
 	if err != nil {
-		log.Fatal(err)
-		}
-		defer src.Close()
-	
-
-		for {
-			_, err := src.Read(buffer)
-			if err != nil && err != io.EOF {
-				log.Fatal(err)
-			}
-			bytesCount++
-			if buffer[0] == 0x0A {
-				lineCount++
-	
-
-				if lineCount == 1 {
-					linebuf = nil
-					continue
-				}
-				if lineCount == 16756 {
-					break
-				}
-				elementArray := strings.Split(string(linebuf), ";")
-				if len(elementArray) > 3 {
-					celsius := elementArray[3]
-					f, err := strconv.ParseFloat(celsius, 64)
-					if err != nil {
-						log.Fatal(err)
-					}
-					sum += f
-					n += 1
-				}
-				linebuf = nil
-			} else {
-				linebuf = append(linebuf, buffer[0])
-			}
-			if err == io.EOF {
-				break
-			}
-			average := sum / n
-	
-
-			if unit == "c" {
-				result = fmt.Sprintf("%.2f", average)
-			} else if unit == "f" {
-				fahr := conv.CelsiusToFarhenheit(average)
-				result = fmt.Sprintf("%.2f", fahr)
-			}
-		}
-		return result, errors.New("linje har ikke forventet format")
+	log.Fatal(err)
 	}
+	defer src.Close()
+	
+
+	for {
+	_, err := src.Read(buffer)
+	if err != nil && err != io.EOF {
+	log.Fatal(err)
+	}
+	bytesCount++
+	if buffer[0] == 0x0A {
+	lineCount++
+	
+
+	if lineCount == 1 {
+	linebuf = nil
+	continue
+	}
+	if lineCount == 16756 {
+		break
+}
+elementArray := strings.Split(string(linebuf), ";")
+if len(elementArray) > 3 {
+celsius := elementArray[3]
+f, err := strconv.ParseFloat(celsius, 64)
+	if err != nil {
+	log.Fatal(err)
+}
+	sum += f
+	n += 1
+}
+linebuf = nil
+	} else {
+linebuf = append(linebuf, buffer[0])
+}
+if err == io.EOF {
+   break
+	}
+average := sum / n
+	
+
+if unit == "c" {
+result = fmt.Sprintf("%.2f", average)
+} else if unit == "f" {
+fahr := conv.CelsiusToFarhenheit(average)
+        result = fmt.Sprintf("%.2f", fahr)
+	}
+}
+return result, errors.New("linje har ikke forventet format")
+}
 	
 
 func CountLinesInFile(filename string) (string, error) {
