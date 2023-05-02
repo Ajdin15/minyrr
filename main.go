@@ -77,7 +77,7 @@ newLastLine := "Data er basert paa gyldig data (per 18.03.2023) (CC BY 4.0) fra 
 		}
 	elementArray := strings.Split(string(linebuf), ";")
 	if len(elementArray) > 3 {
-	celsius := elementArray[3]
+	celsius := strings.TrimSpace(elementArray[3])
 	f, err := strconv.ParseFloat(celsius, 64)
 	   if err != nil {
 		log.Fatal(err)
@@ -167,7 +167,7 @@ if lineCount == 16756 {
 		}
 elementArray := strings.Split(string(linebuf), ";")
 if len(elementArray) > 3 {
-	celsius := elementArray[3]
+	celsius := strings.TrimSpace(elementArray[3])
 	f, err := strconv.ParseFloat(celsius, 64)
 		if err != nil {
 			log.Fatal(err)
